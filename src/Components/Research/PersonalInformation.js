@@ -148,7 +148,7 @@ const PersonalInformation = () => {
       <div className="application-header">
         <div className="header-content">
           <h1 className="application-title">Application Form</h1>
-          <p className="application-subtitle">Step 2: Personal Information</p>
+          
         </div>
         <button type="button" className="back-button" onClick={() => navigate('/dashboard')}>
           <FaArrowLeft className="back-icon" />
