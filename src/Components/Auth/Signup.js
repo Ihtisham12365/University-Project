@@ -122,7 +122,7 @@ const Signup = ({ onSignup }) => {
 
   return (
     <div className="signup-container">
-      <div className="container d-flex align-items-center justify-content-center" style={{ height: '700px' , margin: '10px 0px' , width: '1200px' }}>
+      <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', margin: '10px 0px', width: '100%', maxWidth: '1200px' }}>
         <div className="card flex-row w-100 h-100 p-0" >
           {/* Form Section */}
           <div className="form-section d-flex flex-column justify-content-center p-5" style={{ flex: 1 }}>
