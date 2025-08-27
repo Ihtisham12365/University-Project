@@ -31,10 +31,10 @@
 html, body {
   height: 100%;
   min-height: 650px;
-  
   background: radial-gradient(circle at center, #93cfff 0%, #219dff 100%);
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .login-container {

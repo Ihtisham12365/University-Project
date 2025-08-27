@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   background: #f8f9fa;
+  overflow: hidden;
 }
 
 /* Top Header */
@@ -249,7 +250,8 @@
 .main-container {
   display: flex;
   margin-top: 70px;
-  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
+  overflow: hidden;
 }
 
 /* Sidebar */
@@ -372,10 +374,47 @@
   background: white;
   margin-left: 250px;
   transition: margin-left 0.3s ease;
+  height: calc(100vh - 70px);
+  overflow: auto;
 }
 
 .main-content.full-width {
   margin-left: 0;
+}
+
+/* When sidebar is open, constrain form widths for consistency */
+.main-content.with-sidebar .personal-info-form,
+.main-content.with-sidebar .application-form-container,
+.main-content.with-sidebar .form-content {
+  max-width: 1115px !important;
+}
+
+/* Compact modern progress tracker when sidebar is open */
+.main-content.with-sidebar .modern-progress-tracker .step-label {
+  font-size: 12px !important;
+}
+
+.main-content.with-sidebar .modern-progress-tracker .step-circle {
+  width: 24px !important;
+  height: 24px !important;
+  font-size: 12px !important;
+}
+
+.main-content.with-sidebar .modern-progress-tracker .modern-step-connector {
+  width: 24px !important;
+}
+
+/* Thicker borders for modern progress tracker */
+.main-content.with-sidebar .modern-progress-tracker {
+  border-width: 2px !important;
+}
+
+.main-content.with-sidebar .modern-progress-tracker .step-circle {
+  border-width: 3px !important;
+}
+
+.main-content.with-sidebar .modern-progress-tracker .modern-step-connector {
+  height: 3px !important;
 }
 
 

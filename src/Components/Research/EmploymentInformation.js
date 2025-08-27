@@ -3,6 +3,7 @@ import { FaArrowLeft, FaExclamationCircle, FaCheck, FaPlus, FaChevronDown, FaChe
 import { useNavigate } from 'react-router-dom';
 import './EmploymentInformation.css';
 import airlogo from '../../Assets/airlogo.png';
+import ProgressTracker from './shared/ProgressTracker.jsx';
 
 const EmploymentInformation = () => {
   const navigate = useNavigate();
@@ -10,6 +11,16 @@ const EmploymentInformation = () => {
   useEffect(() => {
     const t = setTimeout(() => setIsPageLoading(false), 900);
     return () => clearTimeout(t);
+  }, []);
+  // Ensure view starts at top when this page loads
+  useEffect(() => {
+    try {
+      const scrollContainer = document.querySelector('.main-content');
+      if (scrollContainer) {
+        scrollContainer.scrollTo({ top: 0, behavior: 'auto' });
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    } catch {}
   }, []);
 
   // Empty-state vs wizard visibility
@@ -222,33 +233,9 @@ const EmploymentInformation = () => {
         </button>
       </div>
 
-      {/* Important Note (Employment-specific) */}
-      <div className="modern-note" style={{ marginTop: 0 }}>
-        <FaExclamationCircle className="note-icon" />
-        <span className="note-text">
-          Applicant of ASIP is not bound to enter any information regarding Employment
-        </span>
-      </div>
-
       {/* Progress Tracker */}
       <div className="progress-tracker-card">
-        <div className="modern-progress-tracker">
-        {steps.map((step, index) => (
-            <div key={step.id} className="modern-step-container">
-            <div 
-                className={`step-circle ${step.completed ? 'completed' : step.active ? 'active' : 'inactive'}`}
-              onClick={() => handleStepClick(step.id)}
-              style={{ cursor: step.completed || step.active ? 'pointer' : 'default' }}
-            >
-                {step.completed ? <FaCheck /> : <span>{step.id}</span>}
-              </div>
-              <span className={`step-label ${step.active ? 'active' : step.completed ? 'completed' : ''}`}>
-                {step.title}
-              </span>
-              {index < steps.length - 1 && <div className="modern-step-connector" />}
-            </div>
-          ))}
-          </div>
+        <ProgressTracker steps={steps} onStepClick={handleStepClick} />
       </div>
 
       {/* Content */}

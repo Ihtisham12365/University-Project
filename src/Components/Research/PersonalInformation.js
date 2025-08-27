@@ -44,6 +44,16 @@ const PersonalInformation = () => {
     const t = setTimeout(() => setIsPageLoading(false), 900);
     return () => clearTimeout(t);
   }, []);
+  // Ensure view starts at top when this page loads
+  useEffect(() => {
+    try {
+      const scrollContainer = document.querySelector('.main-content');
+      if (scrollContainer) {
+        scrollContainer.scrollTo({ top: 0, behavior: 'auto' });
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    } catch {}
+  }, []);
   const [profilePic, setProfilePic] = useState(null);
   const titleValidityRef = useRef(null);
   const [formData, setFormData] = useState({
@@ -134,6 +144,17 @@ const PersonalInformation = () => {
 
   return (
     <form className="personal-info-form" onSubmit={handleSubmit}>
+      {/* Header to match Application Form */}
+      <div className="application-header">
+        <div className="header-content">
+          <h1 className="application-title">Application Form</h1>
+          <p className="application-subtitle">Step 2: Personal Information</p>
+        </div>
+        <button type="button" className="back-button" onClick={() => navigate('/dashboard')}>
+          <FaArrowLeft className="back-icon" />
+          Back to Dashboard
+        </button>
+      </div>
       {isPageLoading && (
         <div className="full-screen-loader" role="status" aria-live="polite">
           <div className="loader-side left"><span></span><span></span><span></span></div>
@@ -141,14 +162,8 @@ const PersonalInformation = () => {
           <div className="loader-side right"><span></span><span></span><span></span></div>
         </div>
       )}
-      {/* Modern Note and Progress Tracker Card */}
+      {/* Progress Tracker Card */}
       <div className="progress-tracker-card">
-        <div className="important-note modern-note">
-          <span className="note-icon"><FaExclamationCircle /></span>
-          <span className="note-text">
-            <b>Note:</b> Last date of <b>"PERIDOT Research Program"</b> application submission is <span className="deadline">"23/09/25 at 11:59PM"</span>. Saved applications will not be considered after this time.
-          </span>
-        </div>
         <div className="modern-progress-tracker">
           {steps.map((step, index) => (
             <div key={step.id} className="modern-step-container">
