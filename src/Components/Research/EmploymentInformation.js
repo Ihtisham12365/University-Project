@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './EmploymentInformation.css';
 import airlogo from '../../Assets/airlogo.png';
 import ProgressTracker from './shared/ProgressTracker.jsx';
+import { countryList, getCities } from '../../constants/locations.js';
 
 const EmploymentInformation = () => {
   const navigate = useNavigate();
@@ -41,7 +42,6 @@ const EmploymentInformation = () => {
     category: '',
     employerName: '',
     centers: '',
-    jobTitle: '', // kept for future use
     employmentType: '', // kept for future use
     department: '', // kept for future use
     // Section 2 - Organization Details
@@ -127,24 +127,7 @@ const EmploymentInformation = () => {
     }
   };
 
-  const isFieldDisabled = (fieldName) => {
-    // Section 1 fields are always enabled
-    if (['country', 'sector', 'category', 'employerName', 'organizationType'].includes(fieldName)) {
-      return false;
-    }
-    
-    // Section 2 fields require Section 1 to be complete
-    if (['addressCountry', 'addressCity', 'addressLine', 'contactCountryCode', 'contactNumber', 'officeEmail', 'website'].includes(fieldName)) {
-      return !isSectionComplete(0);
-    }
-    
-    // Section 3 fields require Section 2 to be complete
-    if (['jobType', 'jobTitle', 'fieldOfWork', 'careerLevel', 'startDate', 'endDate', 'currentlyWorking', 'jobDescription'].includes(fieldName)) {
-      return !isSectionComplete(1);
-    }
-    
-    return false;
-  };
+
 
 
 

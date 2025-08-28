@@ -6,6 +6,7 @@ import { FaUser, FaEnvelope, FaLock, FaPhone, FaIdCard, FaEye, FaEyeSlash } from
 
 import logosvg from '../../Assets/svg.svg';
 import { httpRequest } from '../../api/http.js';
+import { getCities } from '../../constants/locations.js';
 const Signup = ({ onSignup }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -30,6 +31,9 @@ const Signup = ({ onSignup }) => {
     document.body.classList.add('signup-bg');
     return () => document.body.classList.remove('signup-bg');
   }, []);
+
+  const pakistanCities = getCities('Pakistan');
+
 
   const validateField = (name, value) => {
     let error = '';
@@ -265,22 +269,22 @@ const Signup = ({ onSignup }) => {
               <div className="mb-3">
                 <label htmlFor="city" className="form-label">City</label>
                 <select
-                  name="city"
-                  className={`form-control ${fieldErrors.city && touched.city ? 'is-invalid' : ''}`}
-                  id="city"
-                  value={formData.city}
-                  onChange={handleChanges}
-                  onBlur={handleBlur}
-                  required
-                  aria-required="true"
-                  aria-invalid={!!fieldErrors.city}
-                >
-                  <option value="">Select a city</option>
-                  <option value="Multan">Multan</option>
-                  <option value="Islamabad">Islamabad</option>
-                  <option value="Kamra">Kamra</option>
-                  <option value="Karachi">Karachi</option>
-                </select>
+                    name="city"
+                    className={`form-control ${fieldErrors.city && touched.city ? 'is-invalid' : ''}`}
+                    id="city"
+                    value={formData.city}
+                    onChange={handleChanges}
+                    onBlur={handleBlur}
+                    required
+                    aria-required="true"
+                    aria-invalid={!!fieldErrors.city}
+                    size={5}   // 👈 shows only 5 cities at a time
+                  >
+                    {pakistanCities.map(c => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+
                 {fieldErrors.city && touched.city && <div className="invalid-feedback">{fieldErrors.city}</div>}
               </div>
               <div className="mb-3 row">
