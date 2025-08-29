@@ -225,19 +225,6 @@ const PublicationDetails = ({ onNext, onBack, formData, setFormData }) => {
                     />
                   </div>
                 </div>
-
-                <div className="form-row">
-                  <div className="form-group full-width">
-                    <label>Abstract/Description</label>
-                    <textarea
-                      value={publication.description}
-                      onChange={(e) => updatePublication(publication.id, 'description', e.target.value)}
-                      placeholder="Brief description or abstract of the publication"
-                      rows="4"
-                    />
-                  </div>
-                </div>
-
                 <div className="form-row">
                   <div className="form-group checkbox-group">
                     <label className="checkbox-label">
@@ -260,6 +247,20 @@ const PublicationDetails = ({ onNext, onBack, formData, setFormData }) => {
                     </label>
                   </div>
                 </div>
+
+                <div className="form-row">
+                  <div className="form-group full-width">
+                    <label>Abstract/Description</label>
+                    <textarea
+                      value={publication.description}
+                      onChange={(e) => updatePublication(publication.id, 'description', e.target.value)}
+                      placeholder="Brief description or abstract of the publication"
+                      rows="4"
+                    />
+                  </div>
+                </div>
+
+                
 
                 <div className="card-actions">
                   <button

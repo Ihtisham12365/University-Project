@@ -184,7 +184,47 @@ const EmploymentInformation = () => {
 
   const toggleSection = (index) => {
     setActiveSectionIndex((prev) => (prev === index ? -1 : index));
+    // After state updates, ensure the header of the opened section scrolls into view from the top
+    requestAnimationFrame(() => {
+      try {
+        const headers = document.querySelectorAll('.accordion-section .accordion-header');
+        const targetHeader = headers[index];
+        if (targetHeader && typeof targetHeader.scrollIntoView === 'function') {
+          targetHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } catch {}
+    });
   };
+
+  // Keep a simple safety: if active section changes programmatically, scroll to its header
+  useEffect(() => {
+    if (activeSectionIndex >= 0) {
+      const id = requestAnimationFrame(() => {
+        try {
+          const headers = document.querySelectorAll('.accordion-section .accordion-header');
+          const targetHeader = headers[activeSectionIndex];
+          if (targetHeader && typeof targetHeader.scrollIntoView === 'function') {
+            targetHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } catch {}
+      });
+      return () => cancelAnimationFrame(id);
+    }
+  }, [activeSectionIndex]);
+
+  // When wizard first shows, ensure we start at the first section's top
+  useEffect(() => {
+    if (showEmploymentWizard) {
+      try {
+        const firstHeader = document.querySelector('.accordion-section .accordion-header');
+        if (firstHeader && typeof firstHeader.scrollIntoView === 'function') {
+          firstHeader.scrollIntoView({ behavior: 'auto', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        }
+      } catch {}
+    }
+  }, [showEmploymentWizard]);
 
   const handleSaveAndClose = () => {
     // Persist to backend later; for now keep in local state

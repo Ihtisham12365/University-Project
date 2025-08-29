@@ -1,7 +1,7 @@
 @import './shared.css';
 
 .education-details-section {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -47,10 +47,7 @@
   margin-top: 2rem;
 }
 
-.add-education .btn {
-  padding: 1rem 2rem;
-  font-size: 1rem;
-}
+.add-education .btn { height: 44px; padding: 0 12px; font-size: 1rem; }
 
 /* Upload within education */
 .edu-upload-area {
